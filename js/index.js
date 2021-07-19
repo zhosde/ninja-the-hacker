@@ -16,7 +16,6 @@ let bullets = [];
 let frames = 0;
 let backGround = new Background();
 let player = new Player();
-let bullet = new Bullet();
 
 // event control
 document.onkeydown = function (e) {
@@ -26,9 +25,8 @@ document.onkeydown = function (e) {
   if (e.key === "ArrowRight") {
     player.moveRight();
   }
-  if (e.key === "Space") {
-    bullets.push(bullet);
-    updateBullets();
+  if (e.key === " ") {
+    shoot();
   }
 };
 
@@ -42,14 +40,32 @@ function updateTargets() {
   for (let i = 0; i < targets.length; i++) {
     targets[i].y += 1;
     targets[i].draw();
+    if (
+      !(
+        bullets[i].y + bullets[i].height < targets[i].y ||
+        bullets[i].y > targets[i].y + targets[i].height ||
+        bullets[i].x + bullets[i].width < targets[i].x ||
+        bullets[i].x > targets[i].x + targets[i].width
+      )
+    ) {
+      bullets.splice(i, 1);
+      targets.splice(i, 1);
+      continue;
+    }
   }
+}
+
+// shoot the bullet
+function shoot() {
+  let bullet = new Bullet();
+  bullets.push(bullet);
 }
 
 // update the bullets
 function updateBullets() {
-  for (let i = 0; i < bullets.length; i++) {
-    bullets[i].draw();
-    bullets[i].y -= 5;
+  for (let j = 0; j < bullets.length; j++) {
+    bullets[j].y -= 10;
+    bullets[j].draw();
   }
 }
 
@@ -58,13 +74,13 @@ function updateBullets() {
 //   ctx.clearInterval(interval)
 // }
 
-// collison detection
+// collison detection --> target vs player
 function crashWith(target) {
   return !(
     player.y + player.height < target.y ||
-    player.y+15 > target.y + target.height ||
-    player.x-50 + player.width < target.x ||
-    player.x+30 > target.x + target.width
+    player.y + 15 > target.y + target.height ||
+    player.x - 50 + player.width < target.x ||
+    player.x + 30 > target.x + target.width
   );
 }
 
@@ -74,7 +90,7 @@ function checkGameOver() {
   });
   if (crashed) {
     document.location.reload();
-    alert('GAME OVER')
+    alert("GAME OVER");
   }
 }
 
@@ -88,11 +104,12 @@ function clearCanvas() {
 
 // start the game
 function startGame() {
-  let interval = setInterval(() => {
+  setInterval(() => {
     clearCanvas();
     backGround.draw();
     player.draw();
-    updateTargets();
     checkGameOver();
-  }, 20);
+    updateBullets();
+    updateTargets();
+  }, 15);
 }

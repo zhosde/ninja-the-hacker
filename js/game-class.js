@@ -55,12 +55,13 @@ class Target {
 // class the bullet
 class Bullet {
   constructor() {
-    this.x = player.x;
-    this.y = 300;
-    this.width = 30;
-    this.height = 30;
+    this.x = player.x+15
+    this.y = player.y;
+    this.width = 25;
+    this.height = 25;
+    this.shown = true;
     this.img = new Image();
-    this.img.src = "./images/Shuriken.png";
+    this.img.src = "./images/blade.png";
   }
   draw() {
     ctx.drawImage(this.img, this.x, this.y, this.width, this.height);
