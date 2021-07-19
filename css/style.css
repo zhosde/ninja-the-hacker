@@ -43,3 +43,7 @@ body button:hover {
     background-color: blue;
 }
 
+.instruct p{
+    font-size: 18px;
+    text-decoration: underline;
+}

@@ -6,13 +6,15 @@ window.onload = () => {
   });
 };
 
-// get the canvas
+// get the canvas and score
 const canvas = document.getElementById("canvas");
 const ctx = canvas.getContext("2d");
+let score = document.getElementById('score');
 
 // variables/instances
 let targets = [];
 let bullets = [];
+let scoreNo = 0;
 let frames = 0;
 let backGround = new Background();
 let player = new Player();
@@ -50,6 +52,7 @@ function updateTargets() {
     ) {
       bullets.splice(i, 1);
       targets.splice(i, 1);
+      scoreNo += 20;
       continue;
     }
   }
@@ -63,16 +66,16 @@ function shoot() {
 
 // update the bullets
 function updateBullets() {
-  for (let j = 0; j < bullets.length; j++) {
+  for (let j = 0; j< bullets.length; j++) {
     bullets[j].y -= 10;
     bullets[j].draw();
   }
 }
 
-// stop the game
-// function stopGame(){
-//   ctx.clearInterval(interval)
-// }
+// set the score
+function setScore(){
+  score.innerHTML = scoreNo;
+}
 
 // collison detection --> target vs player
 function crashWith(target) {
@@ -94,8 +97,6 @@ function checkGameOver() {
   }
 }
 
-// score
-// targets that missed
 
 // clear the canvas
 function clearCanvas() {
@@ -111,5 +112,6 @@ function startGame() {
     checkGameOver();
     updateBullets();
     updateTargets();
+    setScore();
   }, 15);
 }
