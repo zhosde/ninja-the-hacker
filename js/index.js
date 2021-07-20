@@ -9,7 +9,7 @@ window.onload = () => {
 // get the canvas and score
 const canvas = document.getElementById("canvas");
 const ctx = canvas.getContext("2d");
-let score = document.getElementById('score');
+let score = document.getElementById("score");
 
 // variables/instances
 let targets = [];
@@ -34,26 +34,26 @@ document.onkeydown = function (e) {
 
 // update the targets
 function updateTargets() {
-  frames += 1;
-  if (frames % 120 == 0) {
+  if (frames % 120 === 0) {
     let target = new Target();
     targets.push(target);
   }
+
   for (let i = 0; i < targets.length; i++) {
     targets[i].y += 1;
     targets[i].draw();
-    if (
-      !(
-        bullets[i].y + bullets[i].height < targets[i].y ||
-        bullets[i].y > targets[i].y + targets[i].height ||
-        bullets[i].x + bullets[i].width < targets[i].x ||
-        bullets[i].x > targets[i].x + targets[i].width
-      )
-    ) {
-      bullets.splice(i, 1);
-      targets.splice(i, 1);
-      scoreNo += 20;
-      continue;
+    for (let j = 0; j < bullets.length; j++) {
+      if (
+        bullets[j].y + bullets[j].height > targets[i].y &&
+        bullets[j].y < targets[i].y + targets[i].height &&
+        bullets[j].x + bullets[j].width > targets[i].x &&
+        bullets[j].x < targets[i].x + targets[i].width
+      ) {
+        bullets.splice(j, 1);
+        targets.splice(i, 1);
+        scoreNo += 20;
+        continue;
+      }
     }
   }
 }
@@ -66,14 +66,17 @@ function shoot() {
 
 // update the bullets
 function updateBullets() {
-  for (let j = 0; j< bullets.length; j++) {
+  for (let j = 0; j < bullets.length; j++) {
     bullets[j].y -= 10;
     bullets[j].draw();
+    if (bullets[j].y < 0) {
+      bullets.splice(j, 1);
+    }
   }
 }
 
 // set the score
-function setScore(){
+function setScore() {
   score.innerHTML = scoreNo;
 }
 
@@ -97,7 +100,6 @@ function checkGameOver() {
   }
 }
 
-
 // clear the canvas
 function clearCanvas() {
   ctx.clearRect(0, 0, canvas.width, canvas.height);
@@ -113,5 +115,6 @@ function startGame() {
     updateBullets();
     updateTargets();
     setScore();
-  }, 15);
+    frames++;
+  }, 20);
 }
