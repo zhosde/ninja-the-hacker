@@ -12,6 +12,7 @@ body {
     border-radius: 10%;
     border-color: #29465b;
     margin: 5% 10%;
+    padding:2% 0;
 }
 
 .title{
@@ -27,6 +28,7 @@ body {
 
 .icon{
     width:10%;
+    padding-bottom: 1%;
 }
 
 .intro-img {
@@ -61,4 +63,8 @@ body button:hover {
 .instruct p{
     font-size: 18px;
     text-decoration: underline;
+}
+
+#score{
+    background-color: #c0ffc8;
 }
