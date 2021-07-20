@@ -51,6 +51,20 @@ class Target {
   }
 }
 
+// class the reward
+class Reward {
+  constructor(){
+    this.y = Math.floor(Math.random() * 50);
+    this.x = Math.floor(Math.random() * 600);
+    this.width = 35;
+    this.height = 35;
+    this.img = new Image();
+    this.img.src = "../images/security.png"
+  }
+  draw(){
+    ctx.drawImage(this.img, this.x, this.y, this.width, this.height);
+  }
+}
 
 // class the bullet
 class Bullet {

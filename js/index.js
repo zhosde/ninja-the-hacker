@@ -14,8 +14,10 @@ let score = document.getElementById("score");
 // variables/instances
 let targets = [];
 let bullets = [];
+let rewards = [];
 let scoreNo = 0;
-let frames = 0;
+let framesOne = 0;
+let framesTwo = 0;
 let backGround = new Background();
 let player = new Player();
 let gameover = new Gameover();
@@ -43,7 +45,7 @@ document.onkeydown = function (e) {
 
 // update the targets
 function updateTargets() {
-  if (frames % 100 === 0) {
+  if (framesOne % 100 === 0) {
     let target = new Target();
     targets.push(target);
   }
@@ -63,6 +65,29 @@ function updateTargets() {
         scoreNo += 20;
         continue;
       }
+    }
+  }
+}
+
+// update the rewards
+function updateRewards() {
+  if (framesTwo % 500 === 0) {
+    let reward = new Reward();
+    rewards.push(reward);
+  }
+
+  for (let i = 0; i < rewards.length; i++) {
+    rewards[i].y += 1;
+    rewards[i].draw();
+    if (
+      player.y + player.height > rewards[i].y &&
+      player.y + 15 < rewards[i].y + rewards[i].height &&
+      player.x - 50 + player.width > rewards[i].x &&
+      player.x + 30 < rewards[i].x + rewards[i].width
+    ) {
+      rewards.splice(i, 1);
+      scoreNo += 50;
+      continue;
     }
   }
 }
@@ -135,6 +160,8 @@ function startGame() {
     updateBullets();
     updateTargets();
     setScore();
-    frames++;
+    updateRewards();
+    framesOne++;
+    framesTwo++;
   }, 20);
 }
