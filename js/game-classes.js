@@ -6,7 +6,7 @@ class Background {
     this.width = canvas.width;
     this.height = canvas.height;
     this.img = new Image();
-    this.img.src = "./images/bg.jpg";
+    this.img.src = "../images/bg.jpg";
   }
   draw() {
     ctx.drawImage(this.img, this.x, this.y, this.width, this.height);
@@ -22,7 +22,7 @@ class Player {
     this.width = 96;
     this.height = 96;
     this.img = new Image();
-    this.img.src = "./images/ninja.png";
+    this.img.src = "../images/ninja.png";
   }
   draw() {
     ctx.drawImage(this.img, this.x, this.y, this.width, this.height);
@@ -44,7 +44,7 @@ class Target {
     this.width = 32;
     this.height = 32;
     this.img = new Image();
-    this.img.src = "./images/bug.png";
+    this.img.src = "../images/bug.png";
   }
   draw() {
     ctx.drawImage(this.img, this.x, this.y, this.width, this.height);
@@ -55,15 +55,29 @@ class Target {
 // class the bullet
 class Bullet {
   constructor() {
-    this.x = player.x+15
+    this.x = player.x+15;
     this.y = player.y;
     this.width = 25;
     this.height = 25;
-    this.shown = true;
     this.img = new Image();
-    this.img.src = "./images/blade.png";
+    this.img.src = "../images/blade.png";
   }
   draw() {
+    ctx.drawImage(this.img, this.x, this.y, this.width, this.height);
+  }
+}
+
+// class the game over picture
+class Gameover{
+  constructor(){
+    this.x = 241.5;
+    this.y = 30;
+    this.width = 317;
+    this.height = 340;
+    this.img = new Image();
+    this.img.src = '../images/game-over.png'
+  }
+  draw(){
     ctx.drawImage(this.img, this.x, this.y, this.width, this.height);
   }
 }

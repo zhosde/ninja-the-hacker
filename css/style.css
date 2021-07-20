@@ -6,10 +6,19 @@ body {
     text-align: center;
 }
 
+#welcome-page{
+    border-width: 10px;
+    border-style: dashed;
+    border-radius: 10%;
+    border-color: #29465b;
+    margin: 5% 10%;
+}
+
 .title{
     display:flex;
     justify-content: center;
     align-items: center;
+    color: #29465b;
 }
 
 .intro {
@@ -23,13 +32,15 @@ body {
 .intro-img {
     width: 40%;
     height:auto;
+    border-style: dotted;
+    border-radius: 10%;
 }
 
 body button {
     position:absolute;
     top:55%;
-    left:45.5%;
-    font-size: 17px;
+    left:44%;
+    font-size: 18px;
     background-color: #368700ee;
     color: #fff;
     padding: 10px 20px;
@@ -41,6 +52,10 @@ body button {
 
 body button:hover {
     background-color: blue;
+}
+
+.instruct p mark{
+    background-color:#c0ffc8;
 }
 
 .instruct p{

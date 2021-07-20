@@ -18,6 +18,11 @@ let scoreNo = 0;
 let frames = 0;
 let backGround = new Background();
 let player = new Player();
+let gameover = new Gameover();
+
+// sounds
+let shooting = new Audio("../audio/shuriken.mp3");
+let bgm = new Audio("../audio/bgm.mp3");
 
 // event control
 document.onkeydown = function (e) {
@@ -29,6 +34,10 @@ document.onkeydown = function (e) {
   }
   if (e.key === " ") {
     shoot();
+    shooting.play();
+  }
+  if (e.key === "Enter") {
+    document.location.reload();
   }
 };
 
@@ -95,9 +104,14 @@ function checkGameOver() {
     return crashWith(target);
   });
   if (crashed) {
-    document.location.reload();
-    alert("GAME OVER");
+    gameoverDisplay();
+    stopGame();
   }
+}
+
+// game over display
+function gameoverDisplay() {
+  gameover.draw();
 }
 
 // clear the canvas
@@ -105,12 +119,18 @@ function clearCanvas() {
   ctx.clearRect(0, 0, canvas.width, canvas.height);
 }
 
+// stop the game
+function stopGame() {
+  clearInterval(interval);
+}
+
 // start the game
 function startGame() {
-  setInterval(() => {
+  let interval = setInterval(() => {
     clearCanvas();
     backGround.draw();
     player.draw();
+    bgm.play();
     checkGameOver();
     updateBullets();
     updateTargets();
