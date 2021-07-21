@@ -45,7 +45,7 @@ document.onkeydown = function (e) {
 
 // update the targets
 function updateTargets() {
-  if (framesOne % 100 === 0) {
+  if (framesOne % 90 === 0) {
     let target = new Target();
     targets.push(target);
   }
