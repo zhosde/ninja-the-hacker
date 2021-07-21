@@ -23,8 +23,8 @@ let player = new Player();
 let gameover = new Gameover();
 
 // sounds
-let shooting = new Audio("../audio/shuriken.mp3");
-let bgm = new Audio("../audio/bgm.mp3");
+let shooting = new Audio("./audio/shuriken.mp3");
+let bgm = new Audio("./audio/bgm.mp3");
 
 // event control
 document.onkeydown = function (e) {
