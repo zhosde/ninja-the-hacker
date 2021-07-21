@@ -7,6 +7,7 @@ class Background {
     this.height = canvas.height;
     this.img = new Image();
     this.img.src = "./images/bg.jpg";
+    console.log(this.img.src)
   }
   draw() {
     ctx.drawImage(this.img, this.x, this.y, this.width, this.height);
