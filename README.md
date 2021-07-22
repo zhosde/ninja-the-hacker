@@ -1,5 +1,7 @@
 # Ninja The Hacker
 
+[Game Demo](https://zhosde.github.io/ninja-the-hacker/)
+
 ### About 
 Project#1 The Game (Ironhack Web Development full-time July 2021 Bootcamp)
 - Player as ninja who is also a hacker, whose daily routin is fixing bugs and enforcing security 
