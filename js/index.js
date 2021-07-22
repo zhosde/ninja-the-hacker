@@ -163,14 +163,14 @@ function setTargetRate() {
   targetRate = targetRate - 30;
 }
 function checkLevel() {
-  if (framesOne === 2000) {
+  if (framesOne === 1000) {
     levelUpDisplay();
     stopGame();
     setTimeout(() => {
       startGame();
     }, 2000);
     targetRate = 60;
-  } else if (framesOne === 3000) {
+  } else if (framesOne === 2000) {
     levelUpDisplay();
     stopGame();
     setTimeout(() => {
