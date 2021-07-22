@@ -18,9 +18,12 @@ let rewards = [];
 let scoreNo = 0;
 let framesOne = 0;
 let framesTwo = 0;
+let targetRate = 100;
+let interval;
 let backGround = new Background();
 let player = new Player();
 let gameover = new Gameover();
+let levelup = new Levelup();
 
 // sounds
 let shooting = new Audio("./audio/shuriken.mp3");
@@ -45,7 +48,7 @@ document.onkeydown = function (e) {
 
 // update the targets
 function updateTargets() {
-  if (framesOne % 90 === 0) {
+  if (framesOne % targetRate === 0) {
     let target = new Target();
     targets.push(target);
   }
@@ -114,6 +117,16 @@ function setScore() {
   score.innerHTML = scoreNo;
 }
 
+// check boundry for the player
+function checkBoundry() {
+  if (player.x <= backGround.x) {
+    player.x = backGround.x;
+  }
+  if (player.x >= backGround.width - player.width) {
+    player.x = backGround.width - player.width;
+  }
+}
+
 // collison detection --> target vs player
 function crashWith(target) {
   return !(
@@ -124,6 +137,7 @@ function crashWith(target) {
   );
 }
 
+// check game over
 function checkGameOver() {
   const crashed = targets.some(function (target) {
     return crashWith(target);
@@ -139,6 +153,33 @@ function gameoverDisplay() {
   gameover.draw();
 }
 
+// level up display
+function levelUpDisplay() {
+  levelup.draw();
+}
+
+// check game level
+function setTargetRate() {
+  targetRate = targetRate - 30;
+}
+function checkLevel() {
+  if (framesOne === 2000) {
+    levelUpDisplay();
+    stopGame();
+    setTimeout(() => {
+      startGame();
+    }, 2000);
+    targetRate = 60;
+  } else if (framesOne === 3000) {
+    levelUpDisplay();
+    stopGame();
+    setTimeout(() => {
+      startGame();
+    }, 2000);
+    targetRate = 40;
+  }
+}
+
 // clear the canvas
 function clearCanvas() {
   ctx.clearRect(0, 0, canvas.width, canvas.height);
@@ -149,19 +190,24 @@ function stopGame() {
   clearInterval(interval);
 }
 
-// start the game
+// set interval
 function startGame() {
-  let interval = setInterval(() => {
-    clearCanvas();
-    backGround.draw();
-    player.draw();
-    bgm.play();
-    checkGameOver();
-    updateBullets();
-    updateTargets();
-    setScore();
-    updateRewards();
-    framesOne++;
-    framesTwo++;
-  }, 20);
+  interval = setInterval(updateGame, 20);
+}
+
+// update the game
+function updateGame() {
+  clearCanvas();
+  backGround.draw();
+  player.draw();
+  bgm.play();
+  checkBoundry();
+  checkLevel();
+  checkGameOver();
+  updateBullets();
+  updateTargets();
+  setScore();
+  updateRewards();
+  framesOne++;
+  framesTwo++;
 }

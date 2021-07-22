@@ -95,3 +95,19 @@ class Gameover{
     ctx.drawImage(this.img, this.x, this.y, this.width, this.height);
   }
 }
+
+// class the level up picture
+class Levelup{
+  constructor(){
+    this.x = 241.5;
+    this.y = 30; 
+    this.width = 263;
+    this.height = 268;
+    this.img = new Image();
+    this.img.src = './images/level-up.png'
+  }
+  draw(){
+    ctx.drawImage(this.img, this.x, this.y, this.width, this.height);
+  }
+}
+
